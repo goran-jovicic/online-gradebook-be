@@ -21,7 +21,6 @@ class CreateProfessorsTable extends Migration
                   ->on('users')
                   ->onDelete('cascade');
             $table->string('image_url');
-            $table->boolean('is_class_teacher');
             $table->timestamps();
         });
     }

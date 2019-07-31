@@ -16,15 +16,10 @@ class CreateGradebooksTable extends Migration
         Schema::create('gradebooks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('professor_id');
+            $table->unsignedBigInteger('professor_id')->nullable();
             $table->foreign('professor_id')
                   ->references('id')
                   ->on('professors')
-                  ->onDelete('cascade');
-            $table->unsignedBigInteger('students_id');
-            $table->foreign('students_id')
-                  ->references('id')
-                  ->on('students')
                   ->onDelete('cascade');
             $table->timestamps();
         });

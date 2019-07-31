@@ -19,6 +19,11 @@ class CreateStudentsTable extends Migration
             $table->string('last_name');
             $table->string('image_url');
             $table->timestamps();
+            $table->unsignedBigInteger('gradebook_id');
+            $table->foreign('gradebook_id')
+                  ->references('id')
+                  ->on('gradebooks')
+                  ->onDelete('cascade');
         });
     }
 

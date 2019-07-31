@@ -46,7 +46,7 @@ class GradebookController extends Controller
      */
     public function show($id)
     {
-        //
+        return Gradebook::with(['professor.user', 'students'])->find($id);
     }
 
     /**
