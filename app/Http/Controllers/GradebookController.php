@@ -35,7 +35,15 @@ class GradebookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'min:2 | max:255',
+        ]);
+
+        return Gradebook::create([
+            'name' => $request->input('name'),
+            'professor_id' => $request->input('professor_id')
+        ]);
     }
 
     /**

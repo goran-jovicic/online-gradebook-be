@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Professor;
 
 class ProfessorController extends Controller
 {
@@ -13,7 +14,7 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        //
+        return Professor::with(['gradebook','user'])->get();
     }
 
     /**
@@ -45,7 +46,7 @@ class ProfessorController extends Controller
      */
     public function show($id)
     {
-        //
+        return Professor::with(['gradebook.students','user'])->find($id);
     }
 
     /**
