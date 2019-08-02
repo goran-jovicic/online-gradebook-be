@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Professor;
+use App\User;
 
 class ProfessorController extends Controller
 {
@@ -35,14 +36,25 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        $professor = new Professor();
-        $professor->firstName = $request->input('first_name');
-        $professor->lastName = $request->input('last_name');
-        $professor->image_url = $request->input('image');
-        
-        $professor->save();
-        return $professor;
-        return User::create($request->all());
+        $this->validate($request, [
+            'first_name' => 'required | max:255',
+            'last_name' => 'required | max:255',
+            'image_url' => 'required'
+        ]);
+
+        \Log::info($request);
+        if(!$request->input('id')){
+            $user = User::create([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+            ]);
+        }
+        $userID = $request->input('id') ? $request->input('id') : $user->id;
+
+        return Professor::create([
+            'user_id' => $userID,
+            'image_url' => $request->input('image_url')
+        ]);
     }
 
     /**

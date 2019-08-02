@@ -88,6 +88,6 @@ class GradebookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gradebook::find($id)->delete();
     }
 }

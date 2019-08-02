@@ -17,6 +17,6 @@ Route::post('/login', 'Auth\LoginController@authenticate');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
-Route::resource('gradebooks', 'GradebookController');
+Route::middleware('jwt')->resource('gradebooks', 'GradebookController');
 
-Route::resource('teachers', 'ProfessorController');
+Route::middleware('jwt')->resource('teachers', 'ProfessorController');
